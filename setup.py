@@ -19,12 +19,11 @@ setup(
     namespace_packages=['ckanext', 'ckanext.redlink'],
     include_package_data=True,
     zip_safe=False,
-    install_requires=[
-        # -*- Extra requirements: -*-
-    ],
     entry_points='''
         [ckan.plugins]
         # Add plugins here, e.g.
         # myplugin=ckanext.redlink.plugin:PluginClass
+        # example_iauthfunctions=ckanext.iauthfunctions.plugin:ExampleIAuthFunctionsPlugin
+        redlink=ckanext.redlink.plugin:ExampleIResourcePreviewPlugin
     ''',
 )
