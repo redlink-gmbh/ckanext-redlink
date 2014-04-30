@@ -41,16 +41,6 @@ class RedlinkPreview(p.SingletonPlugin):
 
 
     def preview_template(self, context, data_dict):
-        log.info('preview_template')
-        # print('====== context[resource] ======')
-        # dump(context['model'])
-
-        # print('====== data_dict ======')
-        # for i in data_dict:
-        #     print i
-        # dump(data_dict)
-        # tk.request.environ['redlink.dataset'] = data_dict['resource']['redlink_dataset']
-        # tk.request.environ['redlink.sparql'] = data_dict['resource']['redlink_sparql']
 
         return 'redlink.html'
 
