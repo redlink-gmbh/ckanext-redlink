@@ -1,0 +1,7 @@
+{% ckan_extends %}
+
+{% block metadata_fields %}
+    {{ super() }}
+
+    {{ form.input('redlink_dataset', label=_('Redlink Dataset'), id='field-redlink_dataset', placeholder=_('Redlink Dataset'), value=data.redlink_dataset, error=errors.redlink_dataset, classes=['control-medium']) }}
+{% endblock %}
