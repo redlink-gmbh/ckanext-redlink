@@ -1,9 +1,23 @@
 {% extends 'dataviewer/base.html' %}
 
 {% block styles %}
+<style>
+    #redlink:hover { text-decoration: none; }
+</style>
 {% endblock %}
 
 {% block page %}
+<!-- Dependencies -->
+<script type="text/javascript">
+    SQUEBI = {
+        selectService : '/redlink',
+        updateService : '',
+        queryParams : { key : '' },
+        app: '/bower_components/squebi'
+    };
+</script>
+<script data-main="main" src="bower_components/requirejs/require.js"></script>
+
 <div id="appLoader" style="margin-top: 100px; text-align: center;">
     <img src="/bower_components/squebi/squebi/img/ajax-loader-big.gif">
 </div>
