@@ -10,10 +10,15 @@
 <!-- Dependencies -->
 <script type="text/javascript">
     SQUEBI = {
-        selectService : '/redlink',
+        selectService : '/redlink/{{ c.redlink_dataset }}',
         updateService : '',
         queryParams : { key : '' },
-        app: '/bower_components/squebi'
+        app: '/bower_components/squebi',
+        samples: [{
+            'name': 'xxx',
+            'value': {{ h.dump_json(c.redlink_sparql)|safe }},
+            'type': 'browse'
+        }]
     };
 </script>
 <script data-main="main" src="bower_components/requirejs/require.js"></script>

@@ -14,10 +14,15 @@ class RedlinkPreview(p.SingletonPlugin):
     p.implements(p.IConfigurer, inherit=True)
     p.implements(p.IResourcePreview, inherit=True)
     p.implements(p.IRoutes, inherit=True)
+    p.implements(p.ITemplateHelpers, inherit=True)
 
     redlink_dataset = ''
-    supported_formats = ['redlink', 'squebi']
+    redlink_sparql = ''
+    supported_formats = ['sparql', 'squebi']
 
+    ## ITemplateHelpers
+    def get_helpers(self):
+        return {'sparql': self.redlink_sparql}
 
     ## IConfigurer
     def update_config(self, config):
@@ -36,21 +41,43 @@ class RedlinkPreview(p.SingletonPlugin):
 
 
     def preview_template(self, context, data_dict):
-        RedlinkPreview.redlink_dataset = data_dict['resource']['redlink_dataset']
-        log.info('preview_template [ dataset :: {} ]'.format(RedlinkPreview.redlink_dataset))
+        log.info('preview_template')
+        # print('====== context[resource] ======')
+        # dump(context['model'])
+
+        # print('====== data_dict ======')
+        # for i in data_dict:
+        #     print i
+        # dump(data_dict)
+        # tk.request.environ['redlink.dataset'] = data_dict['resource']['redlink_dataset']
+        # tk.request.environ['redlink.sparql'] = data_dict['resource']['redlink_sparql']
+
         return 'redlink.html'
 
+    def setup_template_variables(self, context, data_dict):
+        """Get the dataset and SPARQL query for the current resource and bind them
+        to the template variables."""
+        dataset = data_dict['resource']['redlink_dataset']
+        sparql = data_dict['resource']['redlink_sparql']
+
+        tk.c.redlink_dataset = dataset
+        tk.c.redlink_sparql = sparql
 
     ## IRoutes
     def after_map(self, map):
+        log.info('after_map')
         controller = 'ckanext.redlink.plugin:RedlinkController'
-        map.connect('/redlink', controller=controller, action='redlink')
+        map.connect('/redlink/:dataset', controller=controller, action='redlink')
 
         return map
 
+def dump(obj):
+    for attr in dir(obj):
+        print "obj.%s = %s" % (attr, getattr(obj, attr))
+
 
 class RedlinkController(p.toolkit.BaseController):
-    def redlink(self, environ):
+    def redlink(self, environ, dataset):
         # The client may request different response formats. The format is set in the Accept header.
         # We get the Accept header from the request and copy it to the request we relay to the remote
         # server.
@@ -60,7 +87,6 @@ class RedlinkController(p.toolkit.BaseController):
 
         app_key = config.get('redlink.app.key', '')  # Get the application key set in the configuration.
 
-        dataset = RedlinkPreview.redlink_dataset
         log.info('redlink [ dataset :: {} ]'.format(dataset))
         url = 'https://api.redlink.io/1.0-BETA/data/' + dataset + '/sparql/select?key=' + app_key
 
