@@ -1,10 +1,10 @@
 /**
- * JSON Writer
+ * CSV Writer
  */
 squebi.run( function($extension,SQUEBI){
 
     function buildLink(query) {
-        var query = SQUEBI.selectService + "?query=" + encodeURIComponent(query) + "&out=json";
+        var query = SQUEBI.selectService + "?query=" + encodeURIComponent(query) + "&out=csv";
         if(SQUEBI.queryParams) {
             for(var property in SQUEBI.queryParams) {
                 query += "&" + property + "=" + SQUEBI.queryParams[property];
@@ -20,7 +20,7 @@ squebi.run( function($extension,SQUEBI){
             $rootScope.alerts.push(data.data);
 
         } else {
-            $scope.data = angular.toJson(data.data, true);
+            $scope.data = data.data, true;
             $scope.href = buildLink(data.query);
 
             $scope.template = SQUEBI.app + '/squebi/template/data.html';
@@ -32,6 +32,6 @@ squebi.run( function($extension,SQUEBI){
         $scope.template = SQUEBI.app + '/squebi/template/basic.html';
     }
 
-    var writer = $extension.createResultWriter("json","JSON", "json", "Displays SPARQL result as JSON", onsuccess, onfailure);
-    writer.position = 3;
+    var writer = $extension.createResultWriter("csv","CSV", {select:"text/csv"}, "Displays SPARQL result as CSV", onsuccess, onfailure);
+    writer.position = 4;
 });

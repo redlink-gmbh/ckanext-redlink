@@ -1,6 +1,6 @@
 {
   "name": "Squebi",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "dependencies": {
     "requirejs": "2.1.11",
     "requirejs-plugins": "1.0.2",
@@ -11,21 +11,21 @@
     "fontawesome": "4.0.3",
     "angular-ui-codemirror": "0.1.0",
     "angular-bootstrap": "0.9.0",
-    "require-css": "0.1.2"
+    "require-css": "0.1.2",
+    "angular-local-storage": "0.0.1"
   },
   "ignore": [
     "pom.xml",
     "R-logo.png"
   ],
   "homepage": "https://github.com/tkurz/squebi",
-  "_release": "0.0.5",
+  "_release": "0.0.6",
   "_resolution": {
     "type": "version",
-    "tag": "v0.0.5",
-    "commit": "5ac7e9160782a98ac4e26e0e356c953d7cf7a3db"
+    "tag": "v0.0.6",
+    "commit": "1cc813bb08ea2330d3b1b0340682d33703cdcf81"
   },
   "_source": "git://github.com/tkurz/squebi.git",
   "_target": "~0.0.5",
-  "_originalSource": "squebi",
-  "_direct": true
+  "_originalSource": "squebi"
 }

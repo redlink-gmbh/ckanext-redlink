@@ -12,8 +12,10 @@ requirejs.config({
         goog : SQUEBI.bower + "/requirejs-plugins/src/goog",
         jquery : SQUEBI.bower + "/jquery/dist/jquery",
         angular : SQUEBI.bower + "/angular/angular",
+        angularLocalStorage : SQUEBI.bower + "/angular-local-storage/angular-local-storage",
         _bootstrap : SQUEBI.bower + "/bootstrap/dist/js/bootstrap",
         bootstrapUI : SQUEBI.bower + "/angular-bootstrap/ui-bootstrap",
+        uiBootstrapTpls: SQUEBI.bower + "/angular-bootstrap/ui-bootstrap-tpls",
         _codemirror : SQUEBI.bower + "/codemirror/lib/codemirror",
         codemirrorSparql : SQUEBI.bower + "/codemirror/mode/sparql/sparql",
         codemirrorUI : SQUEBI.bower + "/angular-ui-codemirror/ui-codemirror",
@@ -22,7 +24,9 @@ requirejs.config({
         squebiBrowse : "squebi/js/writer/squebi.browse",
         squebiJson : "squebi/js/writer/squebi.json",
         squebiXml : "squebi/js/writer/squebi.xml",
-        squebiPie: "squebi/js/writer/squebi.pie"
+        squebiCsv : "squebi/js/writer/squebi.csv",
+        squebiPie: "squebi/js/writer/squebi.pie",
+        squebiRdfdot: "squebi/js/writer/squebi.rdfdot"
         //rdfstoreJs: SQUEBI.bower + "/rdfstore-js/dist/browser/rdf_store"
     },
     shim: {
@@ -30,13 +34,17 @@ requirejs.config({
         'angular' : ['jquery'],
         '_bootstrap' : ['jquery'],
         'bootstrapUI' : ['angular','_bootstrap'],
+        'angularLocalStorage' : ['angular'],
+        'uiBootstrapTpls' : ['bootstrapUI'],
         'codemirrorSparql' : ['_codemirror'],
         'codemirrorUI' : ['_codemirror','bootstrapUI'],
         'codemirrorHint' : ['_codemirror'],
-        '_squebi' : ['codemirrorHint','codemirrorUI','codemirrorSparql','bootstrapUI'],//,'rdfstoreJs'
+        '_squebi' : ['codemirrorHint','codemirrorUI','codemirrorSparql','bootstrapUI','uiBootstrapTpls','angularLocalStorage'],//,'rdfstoreJs'
         'squebiBrowse' : ['_squebi'],
         'squebiJson' : ['_squebi'],
         'squebiXml' : ['_squebi'],
+        'squebiCsv' : ['_squebi'],
+        'squebiRdfdot' : ['_squebi'],
         'squebiPie' : ['_squebi']
     },map: {
         '*': {
@@ -49,6 +57,8 @@ require([
     "squebiBrowse",
     "squebiJson",
     "squebiXml",
+    "squebiCsv",
+    "squebiRdfdot",
     'goog!visualization,1,packages:[corechart]',
     "squebiPie",
     "_css!squebi/css/flags",
@@ -63,6 +73,7 @@ require([
     angular.element(document).ready(function($http,$rootScope) {
 
         var defaultConfig = {
+            "configurable" : false,
             "selectService": "http://example.org/sparql/select",
             "updateService": "http://example.org/sparql/update",
             "samples": [
@@ -70,6 +81,7 @@ require([
                 {"name":"List types", "value":"SELECT DISTINCT ?type WHERE {\n  [] a ?type\n} ORDER BY ?type","type":"browse"},
                 {"name":"List properties", "value":"SELECT DISTINCT ?property WHERE {\n  [] ?property []\n} ORDER BY ?property","type":"browse"},
                 {"name":"List classes and count their usage as pie chart", "value":"SELECT ?class (COUNT (?s) AS ?count) WHERE {\n  ?s a ?class\n}\nGROUP BY ?class\nORDER BY DESC(?count)","type":"piechart"},
+                {"name":"Draw a graph from data", "value":"CONSTRUCT {?a ?b ?c} WHERE {?a ?b ?c} LIMIT 5", "type":"rdfdot"},
                 {"name":"Insert a new book to the bookstore","value":"PREFIX dc: <http://purl.org/dc/elements/1.1/>\nINSERT DATA {\n  <http://example/faust1> dc:title \"Faust I\" ;\n                         a <http://example/Book> ;\n                         dc:creator <http://example.org/goethe> .\n}"}
             ],
             "hints": [
