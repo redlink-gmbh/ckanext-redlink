@@ -20,7 +20,7 @@ Installation
 
 Install the extension as usual, in you activated virtualenv:
 
-    pip install -e git+https://github.com/redlink-gmbh/ckanext-redlink.git.git#egg=ckanext-redlink
+    pip install -e git+https://github.com/redlink-gmbh/ckanext-redlink.git#egg=ckanext-redlink
 
 If you want to jump straight away to the end result, just add the plugin to
 your CKAN configuration file:
@@ -43,8 +43,5 @@ How it works
 
 License
 =======
-
-<a href="http://opensource.org/licenses/Apache-2.0"><img src="http://redlink-gmbh.github.io/ckanext-redlink/images/OSI-Approved-License-100x137.png" /></a>
-
 
 [Apache License Version 2.0](LICENSE.txt)
