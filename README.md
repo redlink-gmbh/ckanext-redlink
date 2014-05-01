@@ -7,10 +7,13 @@ This is a CKAN extension that provides *data preview* for datasets hosted on
 <table>
 <tr>
 <td>
-<a href="http://redlink.co"><img src="http://redlink-gmbh.github.io/ckanext-redlink/images/ckan-logo-s.png" /></a>
+<a href="http://redlink.co"><img src="http://redlink-gmbh.github.io/ckanext-redlink/images/logo-300x81.png" /></a>
 </td>
 <td>
-<a href="http://redlink.co"><img src="http://redlink-gmbh.github.io/ckanext-redlink/images/logo-300x81.png" /></a>
+<a href="http://opensource.org/licenses/Apache-2.0"><img src="http://redlink-gmbh.github.io/ckanext-redlink/images/OSI-Approved-License-100x137.png" /></a>
+</td>
+<td>
+<a href="http://ckan.org"><img src="http://redlink-gmbh.github.io/ckanext-redlink/images/ckan-logo-s.png" /></a>
 </td>
 </tr>
 </table>
