@@ -4,19 +4,11 @@ ckanext-redlink - Redlink CKAN extension
 This is a CKAN extension that provides *data preview* for datasets hosted on
 [Redlink](http://redlink.co) using [SQUEBI](https://github.com/tkurz/squebi).
 
-<table style="width: 100%; border: 0;">
-<tr>
-<td>
-<a href="http://redlink.co"><img src="http://redlink-gmbh.github.io/ckanext-redlink/images/logo-300x81.png" /></a>
-</td>
-<td>
-<a href="http://opensource.org/licenses/Apache-2.0"><img src="http://redlink-gmbh.github.io/ckanext-redlink/images/OSI-Approved-License-100x137.png" /></a>
-</td>
-<td>
-<a href="http://ckan.org"><img src="http://redlink-gmbh.github.io/ckanext-redlink/images/ckan-logo-s.png" /></a>
-</td>
-</tr>
-</table>
+<a href="http://redlink.co"><img align="right" src="http://redlink-gmbh.github.io/ckanext-redlink/images/logo-300x81.png" 
+
+<a href="http://opensource.org/licenses/Apache-2.0"><img align="center" src="http://redlink-gmbh.github.io/ckanext-redlink/images/OSI-Approved-License-100x137.png" /></a>
+
+<a href="http://ckan.org"><img align="left" src="http://redlink-gmbh.github.io/ckanext-redlink/images/ckan-logo-s.png" /></a>
 
 Requisites
 ==========
