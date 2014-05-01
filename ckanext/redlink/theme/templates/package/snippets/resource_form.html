@@ -1,8 +1,0 @@
-{% ckan_extends %}
-
-{% block metadata_fields %}
-    {{ super() }}
-
-    {{ form.input('redlink_dataset', label=_('Redlink Dataset'), id='field-redlink_dataset', placeholder=_('Redlink Dataset'), value=data.redlink_dataset, error=errors.redlink_dataset, classes=['control-medium']) }}
-    {{ form.textarea('redlink_sparql', label=_('SPARQL'), id='field-redlink_sparql', placeholder=_('SPARQL statement'), value=data.redlink_sparql, error=errors.redlink_sparql, classes=['control-medium']) }}
-{% endblock %}
