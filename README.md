@@ -1,25 +1,8 @@
-ckanext-redlink - A CKAN extension for datasets hosted on Redlink
+ckanext-redlink - Redlink CKAN extension
 ===========================================================================
 
 This is a CKAN extension that provides *data preview* for datasets hosted on
 [Redlink](http://redlink.co) using [SQUEBI](https://github.com/tkurz/squebi).
-
-* Writing extensions tutorial:
-
-    http://docs.ckan.org/en/latest/extensions/tutorial.html
-
-* Custom theming tutorial:
-
-    http://docs.ckan.org/en/latest/extensions/theming.html
-
-    This is a work in progress, in the meantime provisional docs can be found
-    here:
-
-     http://docs.ckan.org/en/847-new-theming-docs/theming.html
-
-* Example IDatasetForm:
-
-   https://github.com/okfn/ckan/tree/master/ckanext/example_idatasetform
 
 
 Requisites
