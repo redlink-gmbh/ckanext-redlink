@@ -1,4 +1,4 @@
-![Redlink](http://redlink-gmbh.github.io/ckanext-redlink/images/banner.png)
+<a href="http://redlink.co"><img src="http://redlink-gmbh.github.io/ckanext-redlink/images/banner.png" /></a>
 
 ckanext-redlink - Redlink CKAN extension
 ===========================================================================
