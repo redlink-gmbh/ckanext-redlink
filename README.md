@@ -8,6 +8,11 @@ hosted on [Redlink](http://redlink.co) using the *data preview* feature of CKAN.
 
 The SPARQL interface is based on [SQUEBI](https://github.com/tkurz/squebi).
 
+<p align="center">
+  <img src="http://redlink-gmbh.github.io/ckanext-redlink/images/ckanext-redlink-preview.png" />
+</p>
+
+
 Requisites
 ==========
 
