@@ -3,8 +3,10 @@
 ckanext-redlink - Redlink CKAN extension
 ===========================================================================
 
-This is a CKAN extension that provides *data preview* for datasets hosted on
-[Redlink](http://redlink.co) using [SQUEBI](https://github.com/tkurz/squebi).
+This is a CKAN extension that provides *SPARQL querying* capabilities for datasets
+hosted on [Redlink](http://redlink.co) using the *data preview* feature of CKAN.
+
+The SPARQL interface is based on [SQUEBI](https://github.com/tkurz/squebi).
 
 Requisites
 ==========
