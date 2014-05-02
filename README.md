@@ -46,7 +46,20 @@ the next section.
 How it works
 ============
 
-@@TODO@@
+Get the id of the dataset located in [my.redlink.io](https://my.redlink.io) / datasets / dataset page.
+
+In CKAN, configure a dataset and add a resource.
+
+In the resource settings, set the dataset id in the *Redlink Dataset* field.
+
+Set the default SPARQL query in the *Redlink SPARQL*.
+
+If you're unsure which SPARQL query to set, you can use this general all-purpose one:
+```
+SELECT * WHERE {
+  ?subject ?property ?object
+} LIMIT 10
+```
 
 License
 =======
