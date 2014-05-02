@@ -48,11 +48,21 @@ How it works
 
 Get the id of the dataset located in [my.redlink.io](https://my.redlink.io) / datasets / dataset page.
 
+<p align="center">
+  <img src="http://redlink-gmbh.github.io/ckanext-redlink/images/redlink-dataset-id.png" />
+</p>
+
 In CKAN, configure a dataset and add a resource.
 
-In the resource settings, set the dataset id in the *Redlink Dataset* field.
+<p align="center">
+  <img src="http://redlink-gmbh.github.io/ckanext-redlink/images/ckan-add-new-resource.png" />
+</p>
 
-Set the default SPARQL query in the *Redlink SPARQL*.
+In the resource settings, set the dataset id in the *Redlink Dataset* field and the default SPARQL query in the *SPARQL*.
+
+<p align="center">
+  <img src="http://redlink-gmbh.github.io/ckanext-redlink/images/redlink-resource.png" />
+</p>
 
 If you're unsure which SPARQL query to set, you can use this general all-purpose one:
 ```
