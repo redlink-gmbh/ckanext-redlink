@@ -25,9 +25,9 @@ Requisites
 Installation
 ============
 
-Install the extension as usual, in you activated virtualenv:
+Install the extension as usual, in your activated virtualenv:
 
-    pip install -e git+https://github.com/redlink-gmbh/ckanext-redlink.git#egg=ckanext-redlink
+    pip install -e "git+https://github.com/redlink-gmbh/ckanext-redlink.git#egg=ckanext-redlink"
 
 If you want to jump straight away to the end result, just add the plugin to
 your CKAN configuration file:
