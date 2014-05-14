@@ -58,9 +58,17 @@
         <div id="query-container">
             <textarea id="input" ng-model="query" ui-codemirror="editorOptions"></textarea>
         </div>
+         <div id="powered-container" class="sub-jumbotron">
+        <a class="" href="http://www.redlink.co" target="_blank">
+        <img src="/images/powered-redlink.png" />
+         </a>
+         </div>
+          <div id="run-container" class="sub-jumbotron">
         <a class="btn btn-lg btn-success btn-query" ng-click="triggerQuery()">
             <i class="fa fa-play-circle"></i> Run
         </a>
+        </div>
+       
     </div>
 
     <div ng-controller="AlertCtrl">

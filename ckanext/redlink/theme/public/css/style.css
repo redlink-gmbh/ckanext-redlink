@@ -47,8 +47,10 @@ body {
 
 /* Customize container */
 @media (min-width: 868px) {
+	
     .container {
-        max-width: 830px;
+		width: 960px!important;
+       /* max-width: 830px;*/
     }
 
     .container .jumbotron {
@@ -284,6 +286,7 @@ li.menuitem a ul > li > a {
 
 .cm-s-mdn-like.CodeMirror {
     color: #666666;
+	border-radius:0!important;
 }
 
 .cm-s-sparql-mm .cm-keyword {
@@ -336,16 +339,35 @@ li.menuitem a ul > li > a {
 
 .container .jumbotron {
     border-radius: 0 !important;
-    text-align: right;
+    text-align: right!important;
+	box-shadow:none!important;
+	padding:20px 20px 90px 20px!important;
+	background-color:#005D7A!important;
 }
 
-.container {
+body #squebi {
+	
     padding-right: 0;
     padding-left: 0;
     margin-right: 0;
     margin-left: 0;
-    width: 960px;
-    max-width: 880px
+	max-width:880px!important;
+    width: 960px!important;
+}
+
+.btn-lg, .btn-group-lg > .btn {
+ 
+}
+div.sub-jumbotron {
+	width:50%;
+	}
+	
+div#powered-container{float:left; text-align:left; padding-top:30px;}
+div#run-container{float:right;}
+
+a.btn {
+    text-align: right!important;
+
 }
 
 div.ng-scope div.header {
@@ -357,15 +379,15 @@ div.ng-scope div.header {
 }
 
 #query-container {
-    border: 1px solid #aaaaaa;
+    border: 1px solid #aaaaaa!important;
     /* -webkit-border-radius: 0; */
-    -moz-border-radius: 0;
-    -ms-border-radius: 0;
-    -o-border-radius: 0;
-    border-radius: 0;
-    height: 250px;
-    width: 100%;
-    overflow: hidden;
+    -moz-border-radius: 0!important;
+    -ms-border-radius: 0!important;
+    -o-border-radius: 0!important;
+    border-radius: 0!important;
+    height: 250px!important;
+    width: 100%!important;
+    overflow: hidden!important;
 }
 
 th.browser-header {
@@ -409,6 +431,11 @@ a.btn-query {
 a {
     color: #005d7a;
     /* text-decoration: none; */
+}
+.btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
+    background-color: #000000!important;
+    border-color: #FFFFFF!important;
+    color: #FFFFFF;
 }
 
 /*---------------------------------------------------------*/
