@@ -1,0 +1,4 @@
+.format-label[data-format="sparql"] {
+  background-position: 0px 0px;
+  background-image: url('/images/sparql_ds.png');
+}
