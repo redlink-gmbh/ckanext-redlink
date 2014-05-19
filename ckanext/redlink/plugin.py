@@ -4,7 +4,7 @@ import logging
 import urllib
 import urllib2
 
-from pylons import config
+from pylons import config, response
 
 log = logging.getLogger(__name__)
 
@@ -67,6 +67,7 @@ def dump(obj):
 
 
 class RedlinkController(p.toolkit.BaseController):
+
     def redlink(self, environ, dataset):
         # The client may request different response formats. The format is set in the Accept header.
         # We get the Accept header from the request and copy it to the request we relay to the remote
@@ -78,17 +79,22 @@ class RedlinkController(p.toolkit.BaseController):
         app_key = config.get('redlink.app.key', '')  # Get the application key set in the configuration.
 
         log.info('redlink [ dataset :: {} ]'.format(dataset))
-        url = 'https://api.redlink.io/1.0-BETA/data/' + dataset + '/sparql/select?key=' + app_key
+        url = 'https://api.redlink.io/1.0-BETA/data/' + dataset + '/sparql/select?key=' + app_key + '&out=' + (tk.request.params.get('out', '') or '')
 
         log.info('Posting request [ url :: {} ]'.format(url))
 
         # The client is sending the SPARQL statement as the request body. Since we're going to send a
         # url-encoded POST, we need to copy it to the query key.
 
-        values = {'query': tk.request.body}
+        values = {'query': tk.request.params.get('query', tk.request.body)}
 
         data = urllib.urlencode(values)
         req = urllib2.Request(url, data, headers)
-        response = urllib2.urlopen(req)
 
-        return response.read()
+        redlink_response = urllib2.urlopen(req)
+
+        # Set the response content type to match Redlink's.
+
+        response.content_type = redlink_response.info().getheader('Content-Type')
+
+        return redlink_response.read()
