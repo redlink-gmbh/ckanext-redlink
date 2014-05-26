@@ -28,7 +28,7 @@ class RedlinkPreview(p.SingletonPlugin):
     def update_config(self, config):
         p.toolkit.add_public_directory(config, 'theme/public')
         p.toolkit.add_template_directory(config, 'theme/templates')
-        p.toolkit.add_resource('theme/public', 'ckanext-redlink')
+        # p.toolkit.add_resource('theme/public/ckanext-redlink', 'ckanext-redlink')
 
 
     def can_preview(self, data_dict):
