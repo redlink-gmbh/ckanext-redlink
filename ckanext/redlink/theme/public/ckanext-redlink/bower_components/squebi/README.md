@@ -54,8 +54,8 @@ The uri of the bower dependencies
 
 ```javascript
 SQUEBI = {
-    selectService : "https://api.redlink.io/1.0-BETA/data/example/sparql/select",
-    updateService : "https://api.redlink.io/1.0-BETA/data/example/sparql/update",
+    selectService : "https://api.redlink.io/1.0/data/example/sparql/select",
+    updateService : "https://api.redlink.io/1.0/data/example/sparql/update",
     queryParams : {
         key : "mykeyasadditionalqueryparameter"
     }

@@ -79,7 +79,7 @@ class RedlinkController(p.toolkit.BaseController):
         app_key = config.get('redlink.app.key', '')  # Get the application key set in the configuration.
 
         log.info('redlink [ dataset :: {} ]'.format(dataset))
-        url = 'https://api.redlink.io/1.0-BETA/data/' + dataset + '/sparql/select?key=' + app_key + '&out=' + (tk.request.params.get('out', '') or '')
+        url = 'https://api.redlink.io/1.0/data/' + dataset + '/sparql/select?key=' + app_key + '&out=' + (tk.request.params.get('out', '') or '')
 
         log.info('Posting request [ url :: {} ]'.format(url))
 
