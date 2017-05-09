@@ -25,5 +25,6 @@ setup(
         # myplugin=ckanext.redlink.plugin:PluginClass
         # example_iauthfunctions=ckanext.iauthfunctions.plugin:ExampleIAuthFunctionsPlugin
         redlink=ckanext.redlink.plugin:RedlinkPreview
+        redlink=ckanext.redlink.plugin:RedlinkIDatasetFormPlugin
     ''',
 )

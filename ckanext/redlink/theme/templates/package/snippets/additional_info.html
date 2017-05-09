@@ -1,0 +1,10 @@
+{% ckan_extends %}
+
+{% block extras %}
+{% if pkg_dict.redlink_key %}
+<tr>
+    <th scope="row" class="dataset-label">{{ _("Redlink app key") }}</th>
+    <td class="dataset-details">{{ pkg_dict.redlink_key }}</td>
+</tr>
+{% endif %}
+{% endblock %}

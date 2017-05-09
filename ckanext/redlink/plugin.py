@@ -68,13 +68,16 @@ def dump(obj):
 
 class RedlinkController(p.toolkit.BaseController):
 
-    def redlink(self, environ, dataset):
+    def redlink(self, environ, dataset, dataset_id):
         # The client may request different response formats. The format is set in the Accept header.
         # We get the Accept header from the request and copy it to the request we relay to the remote
         # server.
 
         accept = environ.get('HTTP_ACCEPT', 'NOT SET')
         headers = {'Accept': accept}
+
+        dataset_dict = self._before_dataset(dataset_id)
+
 
         app_key = config.get('redlink.app.key', '')  # Get the application key set in the configuration.
 
@@ -98,3 +101,45 @@ class RedlinkController(p.toolkit.BaseController):
         response.content_type = redlink_response.info().getheader('Content-Type')
 
         return redlink_response.read()
+
+class RedlinkIDatasetFormPlugin(p.SingletonPlugin, tk.DefaultDatasetForm):
+    """This extension adds a Redlink API key field to a data-set. """
+    p.implements(p.IDatasetForm)
+
+    def _modify_package_schema(self, schema):
+        schema.update({
+            'redlink_key': [tk.get_validator('ignore_missing'),
+                            tk.get_converter('convert_to_extras')]
+        })
+        return schema
+
+    # Adds the app key on dataset creation time
+    def create_package_schema(self):
+        schema = super(RedlinkIDatasetFormPlugin, self).create_package_schema()
+        schema = self._modify_package_schema(schema)
+        return schema
+
+    # Adds the app key on dataset update time
+    def update_package_schema(self):
+        schema = super(RedlinkIDatasetFormPlugin, self).update_package_schema()
+        schema = self._modify_package_schema(schema)
+        return schema
+
+    # Retrieves the app key on dataset show time
+    def show_package_schema(self):
+        schema = super(RedlinkIDatasetFormPlugin, self).show_package_schema()
+        schema.update({
+            'redlink_key': [tk.get_converter('convert_from_extras'),
+                                tk.get_validator('ignore_missing')]
+        })
+        return schema
+
+    def is_fallback(self):
+        # Return True to register this plugin as the default handler for
+        # package types not handled by any other IDatasetForm plugin.
+        return True
+
+    def package_types(self):
+        # This plugin doesn't handle any special package types, it just
+        # registers itself as the default (above).
+        return []

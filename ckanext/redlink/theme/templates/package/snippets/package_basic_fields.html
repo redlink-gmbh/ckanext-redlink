@@ -1,0 +1,5 @@
+{% ckan_extends %}
+
+{% block package_basic_fields_custom %}
+{{ form.input('redlink_key', label=_('Redlink app key'), id='field-redlink_key', placeholder=_('redlink key'), value=data.redlink_key, error=errors.redlink_key, classes=['control-medium']) }}
+{% endblock %}
