@@ -68,16 +68,13 @@ def dump(obj):
 
 class RedlinkController(p.toolkit.BaseController):
 
-    def redlink(self, environ, dataset, dataset_id):
+    def redlink(self, environ, dataset):
         # The client may request different response formats. The format is set in the Accept header.
         # We get the Accept header from the request and copy it to the request we relay to the remote
         # server.
 
         accept = environ.get('HTTP_ACCEPT', 'NOT SET')
         headers = {'Accept': accept}
-
-        dataset_dict = self._before_dataset(dataset_id)
-
 
         app_key = config.get('redlink.app.key', '')  # Get the application key set in the configuration.
 
@@ -103,7 +100,7 @@ class RedlinkController(p.toolkit.BaseController):
         return redlink_response.read()
 
 class RedlinkIDatasetFormPlugin(p.SingletonPlugin, tk.DefaultDatasetForm):
-    """This extension adds a Redlink API key field to a data-set. """
+    """This plugin adds a Redlink app key to a data-set schema. """
     p.implements(p.IDatasetForm)
 
     def _modify_package_schema(self, schema):
