@@ -1,8 +1,10 @@
 import ckan.plugins as p
+import ckan.model as m
 import ckan.plugins.toolkit as tk
 import logging
 import urllib
 import urllib2
+import re
 
 from pylons import config, response
 
@@ -18,6 +20,7 @@ class RedlinkPreview(p.SingletonPlugin):
 
     redlink_dataset = ''
     redlink_sparql = ''
+    redlink_key = ''
     supported_formats = ['sparql', 'squebi']
 
     ## ITemplateHelpers
@@ -30,7 +33,6 @@ class RedlinkPreview(p.SingletonPlugin):
         p.toolkit.add_template_directory(config, 'theme/templates')
         # p.toolkit.add_resource('theme/public/ckanext-redlink', 'ckanext-redlink')
 
-
     def can_preview(self, data_dict):
         resource = data_dict['resource']
         format_lower = resource['format'].lower()
@@ -41,7 +43,6 @@ class RedlinkPreview(p.SingletonPlugin):
 
 
     def preview_template(self, context, data_dict):
-
         return 'redlink.html'
 
     def setup_template_variables(self, context, data_dict):
@@ -50,12 +51,16 @@ class RedlinkPreview(p.SingletonPlugin):
         dataset = data_dict['resource']['redlink_dataset']
         sparql = data_dict['resource']['redlink_sparql']
 
+        self.redlink_key = data_dict['package']['redlink_key']
+
         tk.c.redlink_dataset = dataset
         tk.c.redlink_sparql = sparql
+        tk.c.redlink_key = data_dict['package']['redlink_key']
 
     ## IRoutes
     def after_map(self, map):
         log.info('after_map')
+
         controller = 'ckanext.redlink.plugin:RedlinkController'
         map.connect('/redlink/:dataset', controller=controller, action='redlink')
 
@@ -76,11 +81,26 @@ class RedlinkController(p.toolkit.BaseController):
         accept = environ.get('HTTP_ACCEPT', 'NOT SET')
         headers = {'Accept': accept}
 
-        app_key = config.get('redlink.app.key', '')  # Get the application key set in the configuration.
+        context = {
+            'model': m,
+            'session': m.Session,
+            'user': tk.c.user or tk.c.author,
+            'auth_user_obj': tk.c.userobj,
+        }
 
-        log.info('redlink [ dataset :: {} ]'.format(dataset))
+        #get the dataset id from the url
+        dataset_id = re.search('http://data.salzburgerland.com/dataset/([\w-]+)/resource/([\w-]+)/preview',environ.get('HTTP_REFERER')).group(1)
+
+        #get the dataset dictionary
+        dataser_dict = tk.get_action('package_show')(context, {'id':dataset_id})
+
+        # Get the application key from the dataset dictionary.
+        app_key = dataser_dict['redlink_key']
+
         url = 'https://api.redlink.io/1.0/data/' + dataset + '/sparql/select?key=' + app_key + '&out=' + (tk.request.params.get('out', '') or '')
 
+        log.info('redlink [ dataset :: {} ]'.format(dataset))
+        log.info('redlink [ key :: {} ]'.format(app_key))
         log.info('Posting request [ url :: {} ]'.format(url))
 
         # The client is sending the SPARQL statement as the request body. Since we're going to send a
@@ -103,6 +123,8 @@ class RedlinkIDatasetFormPlugin(p.SingletonPlugin, tk.DefaultDatasetForm):
     """This plugin adds a Redlink app key to a data-set schema. """
     p.implements(p.IDatasetForm)
 
+    redlink_key=''
+
     def _modify_package_schema(self, schema):
         schema.update({
             'redlink_key': [tk.get_validator('ignore_missing'),
@@ -110,19 +132,21 @@ class RedlinkIDatasetFormPlugin(p.SingletonPlugin, tk.DefaultDatasetForm):
         })
         return schema
 
-    # Adds the app key on dataset creation time
+    # Adds the app key field to the basic dataset schema on dataset creation time
     def create_package_schema(self):
+        log.debug('Creating a new redlink dataset')
         schema = super(RedlinkIDatasetFormPlugin, self).create_package_schema()
         schema = self._modify_package_schema(schema)
         return schema
 
-    # Adds the app key on dataset update time
+    # Adds the app key field to the basic dataset schema on dataset update time
     def update_package_schema(self):
+        log.debug('Updating a redlink dataset')
         schema = super(RedlinkIDatasetFormPlugin, self).update_package_schema()
         schema = self._modify_package_schema(schema)
         return schema
 
-    # Retrieves the app key on dataset show time
+    # Retrieves the app key field to the basic dataset schema on dataset show time
     def show_package_schema(self):
         schema = super(RedlinkIDatasetFormPlugin, self).show_package_schema()
         schema.update({
