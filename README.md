@@ -1,3 +1,7 @@
+**Note:** _Redlink Platform_ has been decommissioned in early 2021, so this project has been archived. If you are interested in the underlying technologies, please drop us a line at [hello@redlink.at](mailto:hello@redlink.at)!
+
+---
+
 <a href="http://redlink.co"><img src="http://redlink-gmbh.github.io/ckanext-redlink/images/banner.png" /></a>
 
 ckanext-redlink - Redlink CKAN extension
